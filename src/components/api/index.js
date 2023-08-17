@@ -10,14 +10,14 @@ const options = {
       tr_latitude: '12.838442',
     },
     headers: {
-      'X-RapidAPI-Key': '6011cafca3msh7e5425ce941bb38p10e2c3jsnb0b334ce19d0',
+      'X-RapidAPI-Key': '404f594c84msh3ea3fce82dbf056p14f24ajsnf661424224cd',
       'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
     }
   };
 
-export const getPlaceData = async (sw, ne) => {
+export const getPlaceData = async (type, sw, ne) => {
     try{
-        const {data : {data}} = await axios.get(URL, {
+        const {data : {data}} = await axios.get(`https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`, {
             params: {
               bl_latitude: sw.lat,
               bl_longitude: sw.lng,
@@ -25,7 +25,7 @@ export const getPlaceData = async (sw, ne) => {
               tr_latitude: ne.lat,
             },
             headers: {
-              'X-RapidAPI-Key': '',
+              'X-RapidAPI-Key': '404f594c84msh3ea3fce82dbf056p14f24ajsnf661424224cd',
               'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
             },
           });
