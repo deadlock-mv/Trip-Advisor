@@ -13,4 +13,8 @@ export default makeStyles(() => ({
   pointer: {
     cursor: 'pointer',
   },
+  weatherDataContainer: {
+    position: 'absolute',
+    zIndex: 2,
+  },
 }));

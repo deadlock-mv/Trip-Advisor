@@ -16,7 +16,7 @@ const List = ({ places, childClicked, isLoading, type, setType, rating, setRatin
         setElRefs(refs);
     }, [places]);
 
-    console.log({ childClicked });
+    // console.log({ childClicked });
 
     return (
         <div className={classes.container}>

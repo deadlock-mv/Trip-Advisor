@@ -26,7 +26,7 @@ export const getPlaceData = async (type, sw, ne) => {
               tr_latitude: ne.lat,
             },
             headers: {
-              'X-RapidAPI-Key': '',
+              'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_TRAVEL_ADVISOR_KEY,
               'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
             },
           });
@@ -39,9 +39,15 @@ export const getPlaceData = async (type, sw, ne) => {
     
 }
 
-export const getWeatherData = async () => {
+export const getWeatherData = async (lat, lng) => {
   try{
-    const {data} = await.axios.get()
+    const { data } = await axios.get(`https://open-weather13.p.rapidapi.com/city/latlon/${lat}/${lng}`, {
+        headers: {
+          'x-rapidapi-key': process.env.REACT_APP_RAPID_API_WEATHER_KEY,
+          'x-rapidapi-host': 'open-weather13.p.rapidapi.com',
+        },
+      });
+      return data;
   }
   catch (error){
     console.log(error);

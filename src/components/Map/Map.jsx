@@ -5,25 +5,32 @@ import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import Rating from "@material-ui/lab/Rating";
 
 import useStyles from "./styles";
+import mapStyles from "../mapStyles";
 
-const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }) => {
+const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, weatherData }) => {
     const classes = useStyles();
     const isDesktop = useMediaQuery('(min-width:600px)');
+
+    console.log({ weatherData });
 
     return (
         <div className={classes.mapContainer}>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: '' }}
+                bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
                 defaultCenter={{ lat: 0, lng: 0 }}
                 center={coordinates}
                 defaultZoom={14}
                 margin={[50, 50, 50, 50]}
-                options={''}
+                // use any one of the options - 
+                // 1-> default ui for map from Google Maps 
+                // 2-> lil modified ui from a library which has been put in mapStyles.js 
+                // options={''}  
+                options={{ disableDefaultUI: true, zoomControl: true, styles: mapStyles }}
                 onChange={(e) => {
                     setCoordinates({ lat: e.center.lat, lng: e.center.lng });
                     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
                 }}
-                onChildClick={(child)=> setChildClicked(child)}
+                onChildClick={(child) => setChildClicked(child)}
             >
                 {places?.map((place, i) => (
                     <div
@@ -45,14 +52,22 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }
                                         src={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
                                         alt={place.name}
                                     />
-                                    <Rating size="small" value={Number(place.rating)} readOnly/>
+                                    <Rating size="small" value={Number(place.rating)} readOnly />
                                 </Paper>
                             )
                         }
 
                     </div>
                 ))}
-
+                {weatherData?.weather?.length && (
+                    <div
+                        className={classes.weatherDataContainer}
+                        lat={weatherData.coord.lat}
+                        lng={weatherData.coord.lon}
+                    >
+                            <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} height="70px" />
+                    </div>
+                )}
             </GoogleMapReact>
         </div>
     );

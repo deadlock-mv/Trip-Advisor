@@ -11,7 +11,7 @@ const PlaceDetails = ({ place, selected, refProps }) => {
 
     // console.log(selected, {refProps});
     if (selected) {
-        console.log("yes");
+        // console.log("yes");
         refProps?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     return (
