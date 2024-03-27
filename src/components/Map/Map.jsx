@@ -65,7 +65,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
                         lat={weatherData.coord.lat}
                         lng={weatherData.coord.lon}
                     >
-                            <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} height="70px" />
+                            <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} height="70px" alt=""/>
                     </div>
                 )}
             </GoogleMapReact>
